@@ -1,0 +1,38 @@
+@font-face 
+{
+    font-family: Roboto-Regular;
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+@font-face 
+{
+    font-family: Roboto-Light;
+    src: url(../fonts/Roboto-Light.ttf);
+}
+
+html > body
+{
+    background-color: #FCFCFC;
+    font-family: Roboto-Regular;
+    color: #212121;
+}
+
+#header
+{
+    
+    margin-top: 5%;
+    text-align: center;
+    
+}
+
+#project-cards
+{
+    margin: 0 auto;
+    border: 1px solid red;
+}
+#card
+{
+    max-width: 60%;
+    margin: 0 auto;
+    border: 1px solid black;
+    text-align: center;
+}
