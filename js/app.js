@@ -7,20 +7,35 @@ function createCard(nameOfCard, colourOfCard, colourOfText)
 
 function createNewCard()
 {
-    var name = document.getElementById('cardName').value;
-    var cardColour = document.getElementById('cardColour').value;
-    var textColour = document.getElementById('textColour').value;
+    var name = document.getElementById('project-name').value;
+    var cardColour = document.getElementById('card-colour').value;
 
-    if (!name || !cardColour || !textColour)
+    if (!name || !cardColour)
         {
             return;
         }
 
-    createCard(name, cardColour, textColour);
+    createCard(name, cardColour, 'white');
+    toggleModal();
 
 }
 
-$('#new-card').click(function(){
-    createNewCard();
+$(document).ready(function()
+{
+    $('#new-card').click(function()
+    {
+        toggleModal();
+    });
+
+    $('#close-modal').click(function()
+    {
+        toggleModal();
+    });
+
+    $('#create-card').click(function()
+    {
+        createNewCard();
+    });
 });
+
 

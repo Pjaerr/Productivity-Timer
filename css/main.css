@@ -28,11 +28,19 @@ html > body
 }
 .mdl-card__title
 {
-    
     margin: auto;
 }
 .card-holder > a
 {
     text-decoration: none;
+    margin: 0 auto;
+}
+
+#project-attributes
+{
+    margin-left: 24px;
+}
+#create-card
+{
     margin: 0 auto;
 }
