@@ -1,23 +1,31 @@
+
+var modalProperties =
+{
+    isClosed: true,
+    displayStyle: 'none'
+};
+
+///When called, will open or close the modal depending upon its current state at the call time.
 function toggleModal()
 {
-    let modalDisplayState = document.getElementById('modal-box').style.display;
+    modalProperties.displayStyle = document.getElementById('modal-box').style.display;
 
-    if (modalDisplayState === 'block')
+    if (modalProperties.displayStyle === 'block')
         {
-            modalDisplayState = 'none';
-            blurContent('mdl-layout__content', 0);
+            modalProperties.displayStyle = 'none';
+            modalProperties.isClosed = true;
         }
     else
         {
-            modalDisplayState = 'block';
-            blurContent('mdl-layout__content', 4);
+            modalProperties.displayStyle = 'block';
+            modalProperties.isClosed = false;
         }
     
-    document.getElementById('modal-box').style.display = modalDisplayState;
+    setDisplayStyleOf('modal-box', modalProperties.displayStyle);
+    setDisplayStyleOf('modal-overlay', modalProperties.displayStyle);
 }
 
-function blurContent(contentId, blurAmt)
+function setDisplayStyleOf(element, displayStyle)
 {
-    var blur = "blur("+blurAmt+"px)";
-    document.getElementById(contentId).style.filter = blur;
+    document.getElementById(element).style.display = displayStyle;
 }

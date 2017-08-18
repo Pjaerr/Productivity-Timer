@@ -1,26 +1,28 @@
 
+/*Styles the box wherein all the modal content sits.*/
 .modal-box
 {
+    /*These dimensions fit all screen widths in the chrome dev tools, however the height
+    will only go to 384px as the modal cannot be made responsive to heights lower than that.*/
     min-width: 256px;
     max-width: 512px;
-    height: 384px;;
+    height: 384px;
 
-
+    display: none;
     margin: auto;
     top: -5%;
     left: 0px;
     bottom: 0px;
     right: 0px;
 
-    position: absolute;
-    z-index: 2;
+    position: fixed;
+    z-index: 10;
 
-    background: #FAFAFA;
-    color: #212121;
+    background: #455A64;
+    color: #FAFAFA;
 
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);  
 }
-
 
 .modal-close-btn
 {
@@ -35,4 +37,22 @@
 {
     margin: 0 auto;
     text-align: center;
+}
+
+.modal-overlay
+{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    display: none;
+    background: black;
+    opacity: 0.4;
+    z-index: 5;
+}
+
+#close-modal
+{
+    color: #fafafa;
 }
