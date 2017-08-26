@@ -7,17 +7,17 @@ function createCard(nameOfCard, colourOfCard, colourOfText)
 
 var projectNameTextfield = document.getElementById('project-name');
 
+var activeColour;
+
 function createNewCard()
 {
-    let selectedColour = $('input[name=colours]:checked').val();
-    let colour = colours[selectedColour];
     
-    if (!projectNameTextfield.value || selectedColour == undefined)
+    if (!projectNameTextfield.value)
         {
             return;
         }
 
-    createCard(projectNameTextfield.value, colour.primary , colour.secondary);
+    createCard(projectNameTextfield.value, activeColour.primary , activeColour.secondary);
     triggerModal();
 }
 
@@ -76,29 +76,41 @@ var colours =
     new Colour("Lime", '#CDDC39', '#F9FBE7'),
     new Colour("Yellow", '#FFEB3B', '#FFFDE7'),
     new Colour("Orange", '#FF9800', '#FFF3E0'),
-    new Colour("Deep Orange", '#FF5722', '#FBE9E7')
+    new Colour("Deep Orange", '#FF5722', '#FBE9E7'),
+    new Colour("Brown", '#795548', '#EFEBE9'),
+    new Colour("Grey", '#9E9E9E', '#FAFAFA')
 ];
 
 var coloursAreLoaded = false;
+var colourSelectDropdown = document.getElementById('colour-select-dropdown');
 
 function addColoursToModal()
 {
-    let set = 0;
-    let count = 0;
     for (var i = 0; i < colours.length; i++)
         {
-            if (count > 2)
+            if (i < 1)
                 {
-                    set++;
-                    count = 0;
+                    $(colourSelectDropdown).append("<option selected value='"+i+"' style='background: "+colours[i].primary+"; color: "+colours[i].secondary+";'>"+colours[i].name+"</option>");
+                    updateDropdown();
                 }
             else
                 {
-                    $('.colourselect'+set).append("<td class = 'colourselect-radio'><label class = 'mdl-radio mdl-js-radio mdl-js-ripple-effect' for = "+colours[i].name+"> <input type = 'radio' id = "+colours[i].name+" name = 'colours' value = '"+i+"'class = 'mdl-radio__button'> <span class = 'mdl-radio__label' style='color:"+colours[i].primary+";'>"+colours[i].name+"</span> </label> </td>");
-                    count++;
+                     $(colourSelectDropdown).append("<option value='"+i+"' style='background: "+colours[i].primary+"; color: "+colours[i].secondary+";'>"+colours[i].name+"</option>");
                 }
+           
         }
 }
+
+function updateDropdown()
+{
+    let selectedColour = colourSelectDropdown.options[colourSelectDropdown.selectedIndex].value 
+    activeColour = colours[selectedColour];
+
+    colourSelectDropdown.style.background = activeColour.primary;
+    colourSelectDropdown.style.color = activeColour.secondary;
+}
+
+colourSelectDropdown.addEventListener('change', updateDropdown);
 
 
 

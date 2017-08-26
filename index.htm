@@ -2,7 +2,8 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
         <title>Productivity Timer</title>
         <link rel="stylesheet" type="text/css" href="css/modal.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -42,30 +43,30 @@
                                 <i class="material-icons">close</i>
                             </button>
                         </div>
-                        <div class="modal-title"><h4>Create a Project</h4></div>
                     </div>
                     <div class="modal-content">
                         <div id="project-attributes">
-                            <h10>Project Name</h10>
-                            <form onsubmit="createNewCard()">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                    <input class="mdl-textfield__input" type="text" id="project-name" maxlength="36">
-                                    <label class="mdl-textfield__label" for="project-name">Project Name</label>
+
+                            <div id="project-attr-name">
+                                <h10>Project Name</h10>
+                                <form onsubmit="createNewCard()">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 65%;">
+                                        <input class="mdl-textfield__input" type="text" id="project-name" maxlength="36">
+                                        <label class="mdl-textfield__label" for="project-name">Project Name</label>
+                                    </div>
+                                </form>
+                            </div>
+                            <br/> <br/>
+                            <div id="project-attr-colourselect">
+                                <h10>Project Colour</h10>
+                                <div id="colour-select">
+                                    <select id="colour-select-dropdown" name="colour-select-dropdown">
+                                        
+                                    </select>
                                 </div>
-                            </form>
-                            <h10>Project Colour</h10>
-                            <table>
-                                <tr class="colourselect0"> 
-                                </tr>
-                                <tr class="colourselect1"> 
-                                </tr>
-                                <tr class="colourselect2"> 
-                                </tr>
-                                <tr class="colourselect3"> 
-                                </tr>
-                            </table>
-                            </br></br>
-                            <button id="create-card" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            </div>
+                            <br/> <br/>
+                            <button id="create-card" class="mdl-button mdl-js-button mdl-js-ripple-effect">
                                 <i class="material-icons">add</i>
                             </button>
                         </div>

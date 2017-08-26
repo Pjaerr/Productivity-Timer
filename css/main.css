@@ -44,12 +44,6 @@ html > body
 }
 #create-card
 {
+    margin-top: 12px;
     background: #FAFAFA;
-    margin-right: 24px;
-    float: right;
-}
-
-.colourselect-radio 
-{
-    padding-left: 12px;
 }
