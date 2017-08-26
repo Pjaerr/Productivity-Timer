@@ -36,8 +36,12 @@ a.mdl-js-ripple-effect { position: relative; }
 .card-holder > a
 {
     text-decoration: none;
-    margin: 0 auto;
     max-width: 512px;
+}
+.card-holder
+{
+    max-width: 512px;
+    display: inline-block;
 }
 
 #project-attributes
@@ -49,4 +53,11 @@ a.mdl-js-ripple-effect { position: relative; }
 {
     margin-top: 12px;
     background: #FAFAFA;
+}
+
+#mdl-drawer-information
+{
+    text-align: justify;
+    margin-left: 4px;
+    margin-right: 4px;
 }
