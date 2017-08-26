@@ -1,17 +1,29 @@
+window.onload = function()
+{
+    if (!coloursAreLoaded)
+        {
+            addColoursToModal();
+        }
+}
+
 function createCard(nameOfCard, colourOfCard, colourOfText)
 {
-    var cardId = nameOfCard.replace(/\s+/g,"_"); //Make the id of new card, that of the name. Replacing spaces with underscores.
+    let cardId = nameOfCard.replace(/\s+/g,"_"); //Make the id of new card, that of the name. Replacing spaces with underscores.
     
+    setCookie(cardId, nameOfCard +'_'+'00:00:00_00:00:00_'+colourOfCard+'_'+colourOfText); //Creates initial cookie for card with default timer  and colour values.
+    console.log(getCookie(cardId));
     $('.cards').prepend("<div id='"+cardId+"'class='card-holder mdl-grid'><a class='mdl-cell--6-col mdl-cell--4-col-phone' href='#'><div style='background: "+colourOfCard+";' class='mdl-cell--6-col mdl-cell--4-col-phone project-card mdl-card mdl-shadow--8dp'><div class='mdl-card__title'><h2 style='color: "+colourOfText+";' class='mdl-card__title-text'>"+nameOfCard+"</h2></div></div></a></div>");
+    document.getElementById(cardId).addEventListener('click', function()
+    {
+        showTimer(cardId);
+    });
 }
 
 var projectNameTextfield = document.getElementById('project-name');
-
 var activeColour;
 
 function createNewCard()
 {
-    
     if (!projectNameTextfield.value)
         {
             return;
@@ -21,13 +33,7 @@ function createNewCard()
     triggerModal();
 }
 
-window.onload = function()
-{
-    if (!coloursAreLoaded)
-        {
-            addColoursToModal();
-        }
-}
+
 
 $(document).ready(function()
 {
@@ -111,6 +117,9 @@ function updateDropdown()
 }
 
 colourSelectDropdown.addEventListener('change', updateDropdown);
+
+
+
 
 
 

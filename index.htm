@@ -72,26 +72,76 @@
                         </div>
                     </div>
                 </div>
+
             <!--Main Content-->
             <main id="mdl-layout__content" class="mdl-layout__content" style="flex: 1 0 auto;">
 
                 <h1 id="header" class="mdl-layout-title">Projects</h1>
 
-                <div class="cards">
+                <div id="main-content" style="display: block;">
+                        <div class="cards">
+                        </div>
+
+                        <!--Blank, create new card-->
+                        </br>
+                        <div class="create-new-card card-holder mdl-grid">
+                            <a id="new-card" class="mdl-cell--6-col mdl-cell--4-col-phone" href="#"><div style="background: #fff;" class="mdl-cell--6-col mdl-cell--4-col-phone project-card mdl-card mdl-shadow--2dp">
+                                    <div class="mdl-card__title">
+                                        <h2 style="color: #212121;" class="mdl-card__title-text">+</h2>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                 </div>
 
-                    <!--Blank, create new card-->
-                    </br><div class="create-new-card card-holder mdl-grid">
-                    <a id="new-card" class="mdl-cell--6-col mdl-cell--4-col-phone" href="#"><div style="background: #fff;" class="mdl-cell--6-col mdl-cell--4-col-phone project-card mdl-card mdl-shadow--2dp">
-                            <div class="mdl-card__title">
-                                <h2 style="color: #212121;" class="mdl-card__title-text">+</h2>
-                            </div>
-                        </div></a>
+                <div id="timer-content" style="display: none;">
+                    
+                    <div class="timer-card mdl-grid">
+                        <div id="timer-active" class="mdl-cell--6-col mdl-cell--4-col-phone project-card mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title">
+                                    <div>
+                                        <h11>Active:  </h11>
+                                        <h2 id="timer-active-text" class="mdl-card__title-text">  00:00:00</h2>
+                                    </div>
+                                </div>
+                        </div>
                     </div>
+
+                    <div id="timer-controls" style="padding-top: 12px; padding-bottom: 32px;">
+                        <div id="reset" style="float: left; margin-left: 40%;">
+                            <a onclick="resetTimers()" id="reset-btn" class="mdl-navigation__link mdl-js-button mdl-js-ripple-effect">
+                                <i class="material-icons">
+                                    replay
+                                </i>
+                            </a>
+                        </div>
+                        <div id="pause" style="float: right; margin-right: 40%;">
+                            <a onclick="pauseTimers()" id="pause-btn" class="mdl-navigation__link mdl-js-button mdl-js-ripple-effect" >
+                                <i class="material-icons">
+                                    pause
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="timer-card mdl-grid">
+                        <div id="timer-inactive" class="mdl-cell--6-col mdl-cell--4-col-phone project-card mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title">
+                                    <div>
+                                        <h11>Inactive:  </h11>
+                                        <h2 id="timer-inactive-text" class="mdl-card__title-text">  00:00:00</h2>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                        
                 </div>
             </main>
+
         </div>
         <script src="js/modal.js"></script>
+        <script src="js/cookies.js"></script>
+        <script src="js/timers.js"></script>
         <script src="js/app.js"></script>
     </body>
 </html>
