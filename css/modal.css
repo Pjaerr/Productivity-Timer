@@ -6,8 +6,8 @@
     will only go to 384px as the modal cannot be made responsive to heights lower than that.*/
     min-width: 304px;
     max-width: 304px;
-    min-height: 384px;
-    max-height: 384px;
+    min-height: 256px;
+    max-height: 256px;
 
     display: none;
     margin: auto;

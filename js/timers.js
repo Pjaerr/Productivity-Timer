@@ -33,7 +33,7 @@ function showTimer(project)
 /*Grabs the DOM elements, and pushes the values from the retrieved cookie into them*/
 function loadContentOnPage()
 {
-	document.getElementById('header').innerText = projectValues[0]; //Set header to project name.
+	document.getElementById('header').innerText = projectValues[0].slice(projectValues[0].indexOf("card::") + 6); //Set header to project name.
 
 	//Set the background and text colour of the two timer cards.
 	initialiseCard('timer-active', projectValues[3], projectValues[4]);

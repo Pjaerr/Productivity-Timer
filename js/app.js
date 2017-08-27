@@ -8,9 +8,10 @@ window.onload = function()
 
 function createCard(nameOfCard, colourOfCard, colourOfText)
 {
-	let cardId = nameOfCard.replace(/\s+/g, "_"); //Make the id of new card, that of the name. Replacing spaces with underscores.
+	nameOfCard = nameOfCard.replace(/_+/g, " "); //Replace underscores with spaces.
+	let cardId = nameOfCard.replace(/\s+/g, "-"); //Make the id of new card, that of the name. Replacing spaces with dashes.
 
-	setCookie(cardId, nameOfCard + '_' + '00:00:00_00:00:00_' + colourOfCard + '_' + colourOfText); //Creates initial cookie for card with default timer  and colour values.
+	setCookie(cardId, 'card::' + nameOfCard + '_' + '00:00:00_00:00:00_' + colourOfCard + '_' + colourOfText); //Creates initial cookie for card with default timer  and colour values.
 	$('.cards').prepend("<div id='" + cardId + "'class='card-holder mdl-grid'><a class='mdl-cell--6-col mdl-cell--4-col-phone' href='#'><div style='background: " + colourOfCard + ";' class='mdl-cell--6-col mdl-cell--4-col-phone project-card mdl-card mdl-shadow--8dp'><div class='mdl-card__title'><h2 style='color: " + colourOfText + ";' class='mdl-card__title-text'>" + nameOfCard + "</h2></div></div></a></div>");
 	document.getElementById(cardId).addEventListener('click', function()
 	{
@@ -60,6 +61,8 @@ function triggerModal()
 	coloursAreLoaded = true;
 }
 
+/*Colour object, should take its name, primary colour (500 on material colour chart) and a secondary colour
+(50 on material colour chart). Just add said object to colours array and it can be used within the web app itself.*/
 function Colour(name, primary, secondary)
 {
 	this.name = name;
@@ -105,6 +108,7 @@ function addColoursToModal()
 	}
 }
 
+
 function updateDropdown()
 {
 	let selectedColour = colourSelectDropdown.options[colourSelectDropdown.selectedIndex].value
@@ -115,3 +119,45 @@ function updateDropdown()
 }
 
 colourSelectDropdown.addEventListener('change', updateDropdown);
+
+
+/*Load Projects from Cookies*/
+
+function getAllProjectCards()
+{
+	let cookiesContainingCards = [];
+
+	let cookies = getAllCookies();
+
+	for (let i = 0; i < cookies.length; i++)
+	{
+		let thisCookie = cookies[i];
+
+		if (thisCookie.includes("card::"))
+		{
+			cookiesContainingCards.push(thisCookie);
+		}
+	}
+
+	return cookiesContainingCards;
+}
+
+function loadProjectCards()
+{
+	let projectCookies = getAllProjectCards();
+
+	if (!projectCookies)
+	{
+		return;
+	}
+
+	for (let i = 0; i < projectCookies.length; i++)
+	{
+		projectCookies[i] = projectCookies[i].slice(projectCookies[i].indexOf("card::") + 6);
+		let thisProjectInfo = projectCookies[i].split("_");
+
+		createCard(thisProjectInfo[0], thisProjectInfo[3], thisProjectInfo[4]);
+	}
+}
+
+loadProjectCards();
