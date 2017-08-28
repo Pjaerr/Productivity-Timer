@@ -1,5 +1,6 @@
 function setCookie(name, value)
 {
+	deleteCookie(name);
 	let d = new Date();
 	d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //Current date + 365 in days.
 	let expires = "expires=" + d.toUTCString(); //Set expire to 365 days as a UTC string.
@@ -14,7 +15,7 @@ function getCookie(cname)
 	let decodedCookie = decodeURIComponent(document.cookie); //Grab cookies associated with this document.
 	let cookieArray = decodedCookie.split(';'); //Split all cookies and assign them to the ca array.
 
-	/*Run through the array of cookies, on each loop, read out the value of the current index and if it
+	/*Run through the array of cookies, on each loop, read out the value of the current index into c and if it
 	is equal to our cookie, return that value associated with said cookie. */
 	for (let i = 0; i < cookieArray.length; i++)
 	{
@@ -42,4 +43,9 @@ function getAllCookies()
 	{
 		return cookieArray;
 	}
+}
+
+function deleteCookie(name) 
+{
+  	document.cookie = name +'=; path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }

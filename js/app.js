@@ -1,3 +1,5 @@
+"use strict";
+
 window.onload = function()
 {
 	if (!coloursAreLoaded)
@@ -6,13 +8,17 @@ window.onload = function()
 	}
 }
 
-function createCard(nameOfCard, colourOfCard, colourOfText)
+function createCard(nameOfCard, colourOfCard, colourOfText, fromWhere)
 {
 	nameOfCard = nameOfCard.replace(/_+/g, " "); //Replace underscores with spaces.
 	let cardId = nameOfCard.replace(/\s+/g, "-"); //Make the id of new card, that of the name. Replacing spaces with dashes.
 
-	setCookie(cardId, 'card::' + nameOfCard + '_' + '00:00:00_00:00:00_' + colourOfCard + '_' + colourOfText); //Creates initial cookie for card with default timer  and colour values.
-	$('.cards').prepend("<div id='" + cardId + "'class='card-holder mdl-grid'><a class='mdl-cell--6-col mdl-cell--4-col-phone' href='#'><div style='background: " + colourOfCard + ";' class='mdl-cell--6-col mdl-cell--4-col-phone project-card mdl-card mdl-shadow--8dp'><div class='mdl-card__title'><h2 style='color: " + colourOfText + ";' class='mdl-card__title-text'>" + nameOfCard + "</h2></div></div></a></div>");
+	if (fromWhere != "cookie")
+	{
+		setCookie(cardId, 'card::' + nameOfCard + '_' + '00:00:00_00:00:00_' + colourOfCard + '_' + colourOfText); //Creates initial cookie for card with default timer  and colour values.
+	}
+	
+	$('.cards').prepend("<div id='" + cardId + "'class='card-holder mdl-grid'><a class='mdl-cell--6-col mdl-cell--4-col-phone' href='#'><div style='background: " + colourOfCard + ";' class='mdl-cell--6-col mdl-cell--4-col-phone project-card mdl-card mdl-shadow--8dp mdl-navigation__link mdl-js-button mdl-js-ripple-effect'><div class='mdl-card__title'><h2 style='color: " + colourOfText + ";' class='mdl-card__title-text'>" + nameOfCard + "</h2></div></div></a></div>");
 	document.getElementById(cardId).addEventListener('click', function()
 	{
 		showTimer(cardId);
@@ -156,7 +162,7 @@ function loadProjectCards()
 		projectCookies[i] = projectCookies[i].slice(projectCookies[i].indexOf("card::") + 6);
 		let thisProjectInfo = projectCookies[i].split("_");
 
-		createCard(thisProjectInfo[0], thisProjectInfo[3], thisProjectInfo[4]);
+		createCard(thisProjectInfo[0], thisProjectInfo[3], thisProjectInfo[4], "cookie");
 	}
 }
 
