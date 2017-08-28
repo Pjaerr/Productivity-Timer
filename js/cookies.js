@@ -1,6 +1,9 @@
 function setCookie(name, value)
 {
+	/*Delete previous cookie by this given name before creating a new one, it doesn't matter
+	if the cookie doesn't exist, as it creates a cookie by given name, set to expire immediately.*/
 	deleteCookie(name);
+
 	let d = new Date();
 	d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000)); //Current date + 365 in days.
 	let expires = "expires=" + d.toUTCString(); //Set expire to 365 days as a UTC string.
@@ -9,9 +12,9 @@ function setCookie(name, value)
 	//Cookie Format: cardId=card::cardName_00:00:00_00:00:00_primaryColour_secondaryColour
 }
 
-function getCookie(cname)
+function getCookie(cookieName)
 {
-	let name = cname + "="; //Append = onto name to make it a usable cookie.
+	let name = cookieName + "="; //Append = onto name to make it a usable cookie.
 	let decodedCookie = decodeURIComponent(document.cookie); //Grab cookies associated with this document.
 	let cookieArray = decodedCookie.split(';'); //Split all cookies and assign them to the ca array.
 

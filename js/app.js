@@ -13,12 +13,14 @@ function createCard(nameOfCard, colourOfCard, colourOfText, fromWhere)
 	nameOfCard = nameOfCard.replace(/_+/g, " "); //Replace underscores with spaces.
 	let cardId = nameOfCard.replace(/\s+/g, "-"); //Make the id of new card, that of the name. Replacing spaces with dashes.
 
+	/*If this is the first time the card has been created (ie. not loaded from a cookie)*/
 	if (fromWhere != "cookie")
 	{
 		setCookie(cardId, 'card::' + nameOfCard + '_' + '00:00:00_00:00:00_' + colourOfCard + '_' + colourOfText); //Creates initial cookie for card with default timer  and colour values.
 	}
 	
 	$('.cards').prepend("<div id='" + cardId + "'class='card-holder mdl-grid'><a class='mdl-cell--6-col mdl-cell--4-col-phone' href='#'><div style='background: " + colourOfCard + ";' class='mdl-cell--6-col mdl-cell--4-col-phone project-card mdl-card mdl-shadow--8dp mdl-navigation__link mdl-js-button mdl-js-ripple-effect'><div class='mdl-card__title'><h2 style='color: " + colourOfText + ";' class='mdl-card__title-text'>" + nameOfCard + "</h2></div></div></a></div>");
+	
 	document.getElementById(cardId).addEventListener('click', function()
 	{
 		showTimer(cardId);
@@ -124,17 +126,19 @@ function updateDropdown()
 	colourSelectDropdown.style.color = activeColour.secondary;
 }
 
+//If a colour is selected, make the dropdown that colour.
 colourSelectDropdown.addEventListener('change', updateDropdown);
 
 
 /*Load Projects from Cookies*/
-
 function getAllProjectCards()
 {
 	let cookiesContainingCards = [];
 
 	let cookies = getAllCookies();
 
+	/*Loop through each cookie, and if the current cookie is a project card (denoted by card::)
+	push that cookie into the cookiesContainingCards array*/
 	for (let i = 0; i < cookies.length; i++)
 	{
 		let thisCookie = cookies[i];
@@ -152,11 +156,13 @@ function loadProjectCards()
 {
 	let projectCookies = getAllProjectCards();
 
+	//If no project cookies exist, don't attempt to loop through them.
 	if (!projectCookies)
 	{
 		return;
 	}
 
+	/*Loop through the project cookies, and for every cookie, split it's attributes and create a card using them*/
 	for (let i = 0; i < projectCookies.length; i++)
 	{
 		projectCookies[i] = projectCookies[i].slice(projectCookies[i].indexOf("card::") + 6);

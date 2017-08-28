@@ -7,6 +7,8 @@ var projectValues;
 var activeTimer;
 var inactiveTimer;
 
+var autoSaveInterval = 10 * 60; //in seconds
+
 /*The only function that should be called externally, gets passed the ID of a project, as it is in the stored cookie.*/
 function showTimer(project)
 {
@@ -73,7 +75,6 @@ function updateTimerText(id, time)
 /*Set the cookie with all the current values at time of calling.*/
 function updateTimerCookie()
 {
-	pauseTimers();
 	setCookie(projectId, projectValues[0] + '_' + activeTimer.time + '_' + inactiveTimer.time + '_' + projectValues[3] + '_' + projectValues[4]);
 }
 
@@ -94,12 +95,15 @@ Timer.prototype.start = function()
 {
 	this.isEnabled = true;
 
+	var count = 0;
 	if (!this.timerHasStarted)
 	{
 		setInterval(function()
 		{
 			if (this.isEnabled)
 			{
+				count += 1;
+
 				this.ss += 1;
 				if (this.ss >= 60)
 				{
@@ -114,6 +118,13 @@ Timer.prototype.start = function()
 
 				this.time = makeTimeString(this.hh)+ ':' + makeTimeString(this.mm) + ':' + makeTimeString(this.ss);
 				updateTimerText(this.timerId, this.time);
+
+				if (count >= autoSaveInterval)
+					{
+						updateTimerCookie();
+						count = 0;
+						console.log("autosaved..");
+					}
 			}
 
 		}.bind(this), 1000);
@@ -177,10 +188,12 @@ document.getElementById('timer-inactive').addEventListener('click', function()
 /*Update the cookie for this timer when the user attempts to leave the page.*/
 window.addEventListener("beforeunload", function(e)
 {
+	pauseTimers();
 	updateTimerCookie();
 });
 document.getElementById('back-to-projects-btn').addEventListener('click', function()
 {
+	pauseTimers();
 	updateTimerCookie();
 
 	//Hide timer content and show main content.
