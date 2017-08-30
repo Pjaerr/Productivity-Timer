@@ -1,0 +1,15 @@
+{
+  "short_name": "Productivity Timer",
+  "name": "Productivity Timer",
+  "icons": [
+    {
+      "src":"ico.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/?utm_source=homescreen",
+  "background_color": "#607D8B",
+  "Theme_color": "#455A64",
+  "display": "standalone"
+}
