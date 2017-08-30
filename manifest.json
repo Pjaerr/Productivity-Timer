@@ -8,7 +8,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "/index.htm",
+  "start_url": "./?utm_source=web_app_manifest",
   "background_color": "#607D8B",
   "Theme_color": "#455A64",
   "display": "standalone"
