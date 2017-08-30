@@ -14,16 +14,16 @@ function showTimer(project)
 {
 	projectId = project; //Store project name for setting cookie down the line.
 
-	let cookie = getCookie(project);
+	let timerData = dataStorage.get(project);
 
-	if (!cookie)
+	if (!timerData)
 	{
-		alert("Cannot find cookie by name " + project + ".");
+		alert("Cannot find timer by name " + project + ".");
 		return;
 	}
 
 	//split cookie by underscores into an array.
-	projectValues = cookie.split('_');
+	projectValues = timerData.split('_');
 
 	//Initialise the Timer objects, passing in the time from the retrieved cookie and their respective text objects on the DOM.
 	activeTimer = new Timer('timer-active-text', projectValues[1]);
@@ -75,7 +75,7 @@ function updateTimerText(id, time)
 /*Set the cookie with all the current values at time of calling.*/
 function updateTimerCookie()
 {
-	setCookie(projectId, projectValues[0] + '_' + activeTimer.time + '_' + inactiveTimer.time + '_' + projectValues[3] + '_' + projectValues[4]);
+	dataStorage.set(projectId, projectValues[0] + '_' + activeTimer.time + '_' + inactiveTimer.time + '_' + projectValues[3] + '_' + projectValues[4]);
 }
 
 function Timer(timerId, time)
@@ -83,12 +83,12 @@ function Timer(timerId, time)
 	this.timerId = timerId; //ID of this timer on the DOM.
 	this.time = time; //this.hh:this.mm:this.ss in string form.
 	this.isEnabled = false;
-	this.timerHasStarted = false; //Is true when the setInterval function has been started, to avoid counting twice.
+	this.hasStarted = false; //Is true when the setInterval function has been started, to avoid counting twice.
 
 	//HH:MM:SS
-	this.hh;
-	this.mm;
-	this.ss;
+	this.hh = 0;
+	this.mm = 0;
+	this.ss = 1;
 }
 
 Timer.prototype.start = function()
@@ -96,8 +96,8 @@ Timer.prototype.start = function()
 	this.isEnabled = true;
 
 	var count = 0;
-	if (!this.timerHasStarted)
-	{
+	if (!this.hasStarted)
+	{	
 		setInterval(function()
 		{
 			if (this.isEnabled)
@@ -129,7 +129,7 @@ Timer.prototype.start = function()
 
 		}.bind(this), 1000);
 
-		this.timerHasStarted = true;
+		this.hasStarted = true;
 	}
 }
 
@@ -191,23 +191,31 @@ window.addEventListener("beforeunload", function(e)
 	pauseTimers();
 	updateTimerCookie();
 });
-document.getElementById('back-to-projects-btn').addEventListener('click', function()
+
+function goBackToProjects()
 {
-	pauseTimers();
+	activeTimer.pause();
+	inactiveTimer.pause();
 	updateTimerCookie();
 
 	//Hide timer content and show main content.
 	document.getElementById('main-content').style.display = 'block';
 	document.getElementById('header').innerText = "Projects";
 	document.getElementById('timer-content').style.display = 'none';
-});
+}
+document.getElementById('back-to-projects-btn').addEventListener('click', function(){goBackToProjects();});
 
 
 //Collective Timer Buttons.
-function pauseTimers()
+function deleteProject()
 {
-	activeTimer.pause();
-	inactiveTimer.pause();
+	if (confirm("Are you sure you want to delete this project?"))
+	{
+		goBackToProjects();
+		let thisProjectCard = document.getElementById(projectId);
+		dataStorage.remove(projectId);
+		thisProjectCard.parentNode.removeChild(thisProjectCard);
+	}	
 }
 function resetTimers()
 {
