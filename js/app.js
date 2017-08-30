@@ -135,8 +135,7 @@ function getAllProjectCards()
 	let dataContainingCards = [];
 
 	let data = dataStorage.getAll();
-
-	console.log(data);
+	
 	/*Loop through each cookie, and if the current cookie is a project card (denoted by card::)
 	push that cookie into the cookiesContainingCards array*/
 	for (let i = 0; i < data.length; i++)
