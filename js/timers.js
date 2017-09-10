@@ -188,7 +188,8 @@ document.getElementById('timer-inactive').addEventListener('click', function()
 /*Update the cookie for this timer when the user attempts to leave the page.*/
 window.addEventListener("beforeunload", function(e)
 {
-	pauseTimers();
+	activeTimer.pause();
+	inactiveTimer.pause();
 	updateTimerCookie();
 });
 
