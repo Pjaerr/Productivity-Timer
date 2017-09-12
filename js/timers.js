@@ -7,6 +7,8 @@ var projectValues;
 var activeTimer;
 var inactiveTimer;
 
+var isDeleted = false;
+
 var autoSaveInterval = 10 * 60; //in seconds
 
 /*The only function that should be called externally, gets passed the ID of a project, as it is in the stored cookie.*/
@@ -75,7 +77,7 @@ function updateTimerText(id, time)
 /*Set the cookie with all the current values at time of calling.*/
 function updateTimerCookie()
 {
-	dataStorage.set(projectId, projectValues[0] + '_' + activeTimer.time + '_' + inactiveTimer.time + '_' + projectValues[3] + '_' + projectValues[4]);
+	dataStorage.set(projectId, projectValues[0] + '_' + activeTimer.time + '_' + inactiveTimer.time + '_' + projectValues[3] + '_' + projectValues[4] + '_' + projectValues[5]);
 }
 
 function Timer(timerId, time)
@@ -188,13 +190,17 @@ document.getElementById('timer-inactive').addEventListener('click', function()
 /*Update the cookie for this timer when the user attempts to leave the page.*/
 window.addEventListener("beforeunload", function(e)
 {
-	activeTimer.pause();
-	inactiveTimer.pause();
-	updateTimerCookie();
+	if (!isDeleted)
+		{
+			activeTimer.pause();
+			inactiveTimer.pause();
+			updateTimerCookie();
+		}
 });
 
 function goBackToProjects()
 {
+	isDeleted = false;
 	activeTimer.pause();
 	inactiveTimer.pause();
 	updateTimerCookie();
@@ -216,6 +222,7 @@ function deleteProject()
 		let thisProjectCard = document.getElementById(projectId);
 		dataStorage.remove(projectId);
 		thisProjectCard.parentNode.removeChild(thisProjectCard);
+		isDeleted = true;
 	}	
 }
 function resetTimers()

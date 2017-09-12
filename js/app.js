@@ -25,6 +25,8 @@ function createCard(nameOfCard, colourOfCard, colourOfText, fromWhere)
 	{
 		showTimer(cardId);
 	});
+
+	
 }
 
 var projectNameTextfield = document.getElementById('project-name');
@@ -161,6 +163,7 @@ function loadProjectCards()
 		return;
 	}
 
+	var cards = [];
 	/*Loop through the project cookies, and for every cookie, split it's attributes and create a card using them*/
 	for (let i = 0; i < projectData.length; i++)
 	{
@@ -168,7 +171,18 @@ function loadProjectCards()
 		let thisProjectInfo = projectData[i].split("_");
 
 		createCard(thisProjectInfo[0], thisProjectInfo[3], thisProjectInfo[4], "data");
+		
 	}
+
+}
+
+
+function Card(name, cardColour, textColour, index)
+{
+	this.name = name;
+	this.colour = cardColour;
+	this.textColour = textColour;
+	this.index = index;
 }
 
 loadProjectCards();
