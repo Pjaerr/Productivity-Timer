@@ -39,21 +39,25 @@
 			<a href="https://github.com/Pjaerr/Productivity-Timer">Source Code</a>
 		</div>
 
+		<!--Main Content-->
+		<main id="mdl-layout__content" class="mdl-layout__content" style="flex: 1 0 auto;">
+			<h1 id="header" class="mdl-layout-title">Projects</h1>
+
+			<!--MODAL-->
 		<div id="modal-box" class="modal-box">
 			<div class="modal-header">
 				<div class="modal-close-btn">
 					<button id="close-modal" class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="triggerModal()">
-						<i class="material-icons">close</i>
+						<span><i class="material-icons">arrow_back</i> Back</span>
 					</button>
 				</div>
 			</div>
 			<div class="modal-content">
 				<div id="project-attributes">
-
 					<div id="project-attr-name">
 						<h10>Project Name</h10>
 						<form>
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 65%;">
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 								<input class="mdl-textfield__input" type="text" id="project-name" maxlength="36">
 								<label class="mdl-textfield__label" for="project-name">Project Name</label>
 							</div>
@@ -74,10 +78,9 @@
 				</div>
 			</div>
 		</div>
+		<!--MODAL-->
 
-		<!--Main Content-->
-		<main id="mdl-layout__content" class="mdl-layout__content" style="flex: 1 0 auto;">
-			<h1 id="header" class="mdl-layout-title">Projects</h1>
+
 
 			<div id="main-content" style="display: block;">
 				<div class="cards">

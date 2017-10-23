@@ -21,7 +21,7 @@ function showTimer(project)
 	if (!timerData)
 	{
 		alert("Cannot find timer by name " + project + ".");
-		return;
+		deleteProject();
 	}
 
 	//split cookie by underscores into an array.

@@ -5,6 +5,8 @@ var modalProperties =
     displayStyle: 'none'
 };
 
+var projects = document.getElementById('main-content');
+
 ///When called, will open or close the modal depending upon its current state at the call time.
 function toggleModal()
 {
@@ -14,15 +16,18 @@ function toggleModal()
         {
             modalProperties.displayStyle = 'none';
             modalProperties.isClosed = true;
+
+            projects.style.display = 'block';
         }
     else
         {
             modalProperties.displayStyle = 'block';
             modalProperties.isClosed = false;
+
+            projects.style.display = 'none';
         }
     
     setDisplayStyleOf('modal-box', modalProperties.displayStyle);
-    setDisplayStyleOf('modal-overlay', modalProperties.displayStyle);
 }
 
 function setDisplayStyleOf(element, displayStyle)

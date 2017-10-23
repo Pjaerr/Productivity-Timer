@@ -8,50 +8,25 @@
     max-width: 304px;
     min-height: 256px;
     max-height: 256px;
-
     display: none;
     margin: auto;
-    top: -5%;
+    top: -25%;
     left: 0px;
     bottom: 0px;
     right: 0px;
 
-    position: fixed;
-    z-index: 10;
-
-    background: #455A64;
-    color: #FAFAFA;
-
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);  
-}
-
-.modal-close-btn
-{
-    float: right;
+    
 }
 
 .modal-title
 {
     margin: 0 auto;
-    margin-top: 2%;
+    
 }
 .modal-title > h4
 {
     margin: 0 auto;
     text-align: center;
-}
-
-.modal-overlay
-{
-    position: fixed;
-    left: 0px;
-    top: 0px;
-    bottom: 0px;
-    right: 0px;
-    display: none;
-    background: black;
-    opacity: 0.4;
-    z-index: 5;
 }
 
 #close-modal
